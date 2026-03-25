@@ -22,22 +22,22 @@ export function VSL({ onQuizClick }: VSLProps) {
   };
 
   return (
-    <div className="relative bg-ink-900 border-y border-ink-800 shadow-2xl">
+    <div className="relative bg-indigo-dark border-y border-indigo shadow-2xl mt-8">
       {/* Top glowing edge */}
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-hunter to-transparent opacity-50"></div>
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-teal-dark to-transparent opacity-50"></div>
       
       <div 
-        className="relative w-full aspect-video max-h-[80vh] overflow-hidden cursor-pointer flex items-center justify-center bg-ink-900"
+        className="relative w-full aspect-video max-h-[80vh] overflow-hidden cursor-pointer flex items-center justify-center bg-indigo-dark"
         onClick={handlePlay}
       >
         {/* Animated Background Canvas */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0a0d14] via-[#0d121c] to-[#080b11]"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1A1644] via-[#0E1030] to-[#131040]"></div>
         
         {/* High-tech Grid */}
         <div 
           className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage: `linear-gradient(rgba(26, 77, 62, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(26, 77, 62, 0.2) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(rgba(28,204,159,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(28,204,159,0.08) 1px, transparent 1px)`,
             backgroundSize: '40px 40px',
             maskImage: 'radial-gradient(ellipse 100% 100% at 50% 50%, black 20%, transparent 80%)'
           }}
@@ -48,7 +48,7 @@ export function VSL({ onQuizClick }: VSLProps) {
           {[...Array(8)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute h-[1px] bg-gradient-to-r from-transparent via-hunter-light to-transparent"
+              className="absolute h-[1px] bg-gradient-to-r from-transparent via-teal to-transparent"
               initial={{ opacity: 0, scaleX: 0, transformOrigin: 'left' }}
               animate={{ 
                 opacity: [0, 0.8, 0], 
@@ -73,7 +73,7 @@ export function VSL({ onQuizClick }: VSLProps) {
           {[...Array(6)].map((_, i) => (
             <motion.div
               key={`node-${i}`}
-              className="absolute rounded-full bg-hunter-light shadow-glow"
+              className="absolute rounded-full bg-teal shadow-[0_0_10px_rgba(28,204,159,0.5)]"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: [0, 0.8, 0], scale: [0.5, 1.5, 0.5] }}
               transition={{
@@ -98,11 +98,11 @@ export function VSL({ onQuizClick }: VSLProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, transition: { duration: 0.3 } }}
-              className="absolute inset-0 flex flex-col items-center justify-center gap-6 bg-ink-900/60 backdrop-blur-sm z-10 hover:bg-ink-900/40 transition-colors duration-500"
+              className="absolute inset-0 flex flex-col items-center justify-center gap-6 bg-indigo-dark/60 backdrop-blur-sm z-10 hover:bg-indigo-dark/40 transition-colors duration-500"
             >
               <div className="relative group">
-                <div className="absolute inset-0 bg-hunter rounded-full blur-xl opacity-40 group-hover:opacity-60 transition-opacity duration-500 animate-pulse"></div>
-                <div className="w-20 h-20 rounded-full bg-hunter flex items-center justify-center text-white relative shadow-2xl transition-transform duration-300 group-hover:scale-105">
+                <div className="absolute inset-0 bg-teal-dark rounded-full blur-xl opacity-40 group-hover:opacity-60 transition-opacity duration-500 animate-pulse"></div>
+                <div className="w-20 h-20 rounded-full bg-teal-dark flex items-center justify-center text-white relative shadow-2xl transition-transform duration-300 group-hover:scale-105">
                   <Play className="w-8 h-8 ml-1" fill="currentColor" />
                 </div>
               </div>
@@ -120,7 +120,7 @@ export function VSL({ onQuizClick }: VSLProps) {
         </AnimatePresence>
 
         {/* Fake Progress Bar */}
-        <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-hunter-dark to-hunter transition-all duration-[100ms] linear z-20" style={{ width: `${progress}%` }}></div>
+        <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-teal-dark to-teal transition-all duration-[100ms] linear z-20" style={{ width: `${progress}%` }}></div>
         
         {/* Time Badge */}
         <div className="absolute bottom-4 right-5 font-mono text-xs text-white/50 bg-black/40 border border-white/10 px-2.5 py-1 z-20 backdrop-blur-md">
@@ -128,13 +128,13 @@ export function VSL({ onQuizClick }: VSLProps) {
         </div>
       </div>
 
-      <div className="bg-ink-900 border-t border-white/5 px-6 md:px-14 py-5 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="bg-indigo-dark border-t border-white/5 px-6 md:px-14 py-5 flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="text-sm font-medium text-white/60">
           Ready to check your eligibility? <strong className="text-white">Take the 90-second investor quiz below.</strong>
         </div>
         <button 
           onClick={onQuizClick}
-          className="font-sans text-xs font-bold tracking-widest uppercase text-ink-900 bg-white px-6 py-3 hover:bg-cream-200 transition-colors shadow-lg"
+          className="font-sans text-xs font-bold tracking-widest uppercase text-indigo bg-white px-6 py-3 hover:bg-cream-200 transition-colors shadow-lg"
         >
           Check My Eligibility &rarr;
         </button>

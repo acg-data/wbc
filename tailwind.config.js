@@ -12,40 +12,45 @@ export default {
         mono: ['"DM Mono"', 'monospace'],
       },
       colors: {
+        // Original brand colors - preserved
+        indigo: {
+          DEFAULT: '#272162',
+          dark: '#1A1644',
+          mid: '#2E2878',
+          light: '#36308A',
+        },
+        teal: {
+          DEFAULT: '#1CCC9F',
+          dark: '#1E8B8A',
+          mid: '#17A384',
+          dim: '#0E5554',
+          pale: '#C8F0E6',
+          50: '#EAF9F5',
+          20: '#F3FDF9',
+        },
+        // Light surface system
         cream: {
-          DEFAULT: '#F8F6F2',
-          100: '#FDFCFA',
-          200: '#F8F6F2',
-          300: '#F0EBE0',
+          DEFAULT: '#F8F9FC',
+          100: '#FFFFFF',
+          200: '#F2F4F9',
+          300: '#E8ECF4',
+          400: '#DDE2EE',
         },
         ink: {
-          DEFAULT: '#0A0D14',
-          900: '#0A0D14',
-          800: '#141824',
-          700: '#23293B',
-          600: '#353D52',
-          500: '#4D566E',
-          400: '#69748E',
-          300: '#8A95AE',
-          200: '#AFB8CD',
-          100: '#D9DFED',
+          DEFAULT: '#0D0E1C',
+          900: '#0D0E1C',
+          800: '#181A2E',
+          700: '#252848',
+          600: '#374062',
+          500: '#4E587A',
+          400: '#6B7590',
+          300: '#8E96AA',
+          200: '#B8BDC8',
+          100: '#DDE0E8',
         },
-        hunter: {
-          DEFAULT: '#1A4D3E',
-          dark: '#113329',
-          light: '#26735D',
-        },
-        oxblood: {
-          DEFAULT: '#6A1920',
-          dark: '#471115',
-        },
-        gold: {
-          DEFAULT: '#C3A35B',
-          light: '#DCC898',
-        }
       },
       boxShadow: {
-        'glow': '0 0 20px rgba(195, 163, 91, 0.3)',
+        'glow': '0 0 20px rgba(30, 139, 138, 0.3)',
       },
       animation: {
         'marquee': 'marquee 40s linear infinite',

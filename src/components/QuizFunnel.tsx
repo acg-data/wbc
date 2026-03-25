@@ -29,7 +29,7 @@ export function QuizFunnel({ onComplete }: QuizFunnelProps) {
   };
 
   const handleNext = () => {
-    if (answers[cur] === undefined) return; // Add shake animation here if needed
+    if (answers[cur] === undefined) return;
     
     if (questions[cur].disqualify.includes(answers[cur])) {
       setStatus('disqualified');
@@ -58,38 +58,37 @@ export function QuizFunnel({ onComplete }: QuizFunnelProps) {
   };
 
   return (
-    <section className="py-24 px-6 md:px-14 bg-cream-100 border-y border-ink-200" id="quiz">
+    <section className="py-24 px-6 md:px-14 bg-cream-200 border-y border-indigo/10" id="quiz">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
-          <div className="flex items-center justify-center gap-3 text-[10px] font-bold tracking-[0.2em] uppercase text-hunter mb-4">
-            <div className="w-5 h-px bg-hunter opacity-70"></div>
+          <div className="flex items-center justify-center gap-3 text-[10px] font-bold tracking-[0.2em] uppercase text-teal-dark mb-4">
+            <div className="w-5 h-px bg-teal-dark opacity-70"></div>
             Investor Eligibility
-            <div className="w-5 h-px bg-hunter opacity-70"></div>
+            <div className="w-5 h-px bg-teal-dark opacity-70"></div>
           </div>
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05] tracking-tight text-ink-900 font-semibold">
-            Find out if you <em className="italic text-hunter font-medium">qualify</em><br/>in 90 seconds.
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05] tracking-tight text-indigo font-semibold">
+            Find out if you <em className="italic text-teal-dark font-medium">qualify</em><br/>in 90 seconds.
           </h2>
           <p className="text-[17px] text-ink-500 mt-6 max-w-xl mx-auto leading-relaxed">
             World Bridge Capital is only open to accredited investors. Answer 7 short questions to check your eligibility and receive your personalised next steps.
           </p>
         </div>
 
-        <div className="bg-white border border-ink-200 shadow-sm p-8 md:p-12 relative overflow-hidden">
-          {/* Top accent line */}
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-ink-900 via-hunter to-hunter-light"></div>
+        <div className="bg-white border border-indigo/10 shadow-sm p-8 md:p-12 relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo via-teal-dark to-teal"></div>
           
           {status === 'playing' && (
             <>
               <div className="flex items-center gap-4 mb-10">
-                <div className="flex-1 h-[2px] bg-ink-100 overflow-hidden">
+                <div className="flex-1 h-[2px] bg-indigo/10 overflow-hidden">
                   <motion.div 
-                    className="h-full bg-hunter"
+                    className="h-full bg-teal-dark"
                     initial={{ width: 0 }}
                     animate={{ width: `${(cur / questions.length) * 100}%` }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
                   />
                 </div>
-                <div className="font-mono text-[10px] text-ink-400 uppercase tracking-widest whitespace-nowrap">
+                <div className="font-mono text-[10px] text-ink-300 uppercase tracking-widest whitespace-nowrap">
                   Question {cur + 1} of {questions.length}
                 </div>
               </div>
@@ -106,9 +105,9 @@ export function QuizFunnel({ onComplete }: QuizFunnelProps) {
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="w-full"
                   >
-                    <h3 className="font-serif text-2xl md:text-3xl font-semibold leading-snug text-ink-900 mb-8">
+                    <h3 className="font-serif text-2xl md:text-3xl font-semibold leading-snug text-indigo mb-8">
                       {questions[cur].q.split(/(\$?\d+(?:,\d+)*(?:\+)?)/g).map((part, i) => 
-                        part.match(/^\$?\d+(?:,\d+)*(?:\+)?$/) ? <em key={i} className="italic text-hunter">{part}</em> : part
+                        part.match(/^\$?\d+(?:,\d+)*(?:\+)?$/) ? <em key={i} className="italic text-teal-dark">{part}</em> : part
                       )}
                     </h3>
                     
@@ -121,16 +120,16 @@ export function QuizFunnel({ onComplete }: QuizFunnelProps) {
                             onClick={() => handleSelect(i)}
                             className={`flex items-center gap-4 p-4 border text-left transition-all duration-200 ${
                               isSelected 
-                                ? 'border-hunter bg-hunter/5 ring-1 ring-hunter' 
-                                : 'border-ink-200 bg-cream-100/50 hover:border-hunter/50 hover:bg-cream-100'
+                                ? 'border-teal-dark bg-teal-50 ring-1 ring-teal-dark' 
+                                : 'border-indigo/10 bg-cream-100/50 hover:border-teal-dark/50 hover:bg-teal-50/50'
                             }`}
                           >
                             <div className={`w-6 h-6 shrink-0 border flex items-center justify-center text-[10px] font-bold font-mono transition-colors ${
-                              isSelected ? 'bg-hunter border-hunter text-white' : 'bg-white border-ink-200 text-ink-400'
+                              isSelected ? 'bg-teal-dark border-teal-dark text-white' : 'bg-white border-indigo/20 text-ink-400'
                             }`}>
                               {String.fromCharCode(65 + i)}
                             </div>
-                            <span className={`text-[14.5px] font-medium ${isSelected ? 'text-hunter' : 'text-ink-800'}`}>
+                            <span className={`text-[14.5px] font-medium ${isSelected ? 'text-teal-dark' : 'text-indigo-700'}`}>
                               {opt}
                             </span>
                           </button>
@@ -141,10 +140,10 @@ export function QuizFunnel({ onComplete }: QuizFunnelProps) {
                 </AnimatePresence>
               </div>
 
-              <div className="flex items-center justify-between mt-10 pt-6 border-t border-ink-100">
+              <div className="flex items-center justify-between mt-10 pt-6 border-t border-indigo/10">
                 <button 
                   onClick={handleBack}
-                  className={`flex items-center gap-2 text-[12px] font-bold tracking-widest uppercase text-ink-400 hover:text-ink-900 transition-colors ${cur === 0 ? 'invisible' : ''}`}
+                  className={`flex items-center gap-2 text-[12px] font-bold tracking-widest uppercase text-ink-300 hover:text-indigo transition-colors ${cur === 0 ? 'invisible' : ''}`}
                 >
                   <ArrowLeft className="w-4 h-4" /> Back
                 </button>
@@ -154,8 +153,8 @@ export function QuizFunnel({ onComplete }: QuizFunnelProps) {
                   disabled={answers[cur] === undefined}
                   className={`flex items-center gap-2 font-sans text-[12px] font-bold tracking-widest uppercase px-6 py-3 transition-all duration-200 ${
                     answers[cur] !== undefined 
-                      ? 'bg-ink-900 text-white hover:bg-hunter shadow-lg hover:shadow-hunter/20 transform hover:-translate-y-px' 
-                      : 'bg-ink-200 text-ink-400 cursor-not-allowed'
+                      ? 'bg-indigo text-white hover:bg-teal-dark shadow-lg hover:shadow-teal-dark/20 transform hover:-translate-y-px' 
+                      : 'bg-indigo/30 text-ink-300 cursor-not-allowed'
                   }`}
                 >
                   {cur === questions.length - 1 ? 'See Results' : 'Continue'} <ArrowRight className="w-4 h-4" />
@@ -170,20 +169,20 @@ export function QuizFunnel({ onComplete }: QuizFunnelProps) {
               animate={{ opacity: 1, scale: 1 }}
               className="text-center py-8"
             >
-              <div className="w-16 h-16 bg-hunter/10 border border-hunter/30 rounded-full flex items-center justify-center text-hunter mx-auto mb-6">
+              <div className="w-16 h-16 bg-teal-50 border border-teal-pale rounded-full flex items-center justify-center text-teal-dark mx-auto mb-6">
                 <Check className="w-8 h-8" />
               </div>
-              <h3 className="font-serif text-3xl font-bold text-ink-900 mb-4">You Appear to <em className="italic text-hunter">Qualify.</em></h3>
+              <h3 className="font-serif text-3xl font-bold text-indigo mb-4">You Appear to <em className="italic text-teal-dark">Qualify.</em></h3>
               <p className="text-[15px] text-ink-500 leading-relaxed mb-10 max-w-lg mx-auto">
                 Based on your answers, you meet the criteria to invest with World Bridge Capital. Submit your application below and our team will reach out within 24 hours to walk you through the investment structure and available positions.
               </p>
               <button 
                 onClick={onComplete}
-                className="w-full md:w-auto font-sans text-[13px] font-bold tracking-widest uppercase text-white bg-hunter px-10 py-4 hover:bg-hunter-dark transition-all duration-200 shadow-lg hover:shadow-hunter/30 transform hover:-translate-y-px"
+                className="w-full md:w-auto font-sans text-[13px] font-bold tracking-widest uppercase text-white bg-teal-dark px-10 py-4 hover:bg-teal-dim transition-all duration-200 shadow-lg hover:shadow-teal-dark/30 transform hover:-translate-y-px"
               >
                 Submit My Application &rarr;
               </button>
-              <p className="text-[11px] text-ink-400 mt-6 leading-[1.6]">
+              <p className="text-[11px] text-ink-300 mt-6 leading-[1.6]">
                 No commitment required. This is a qualification step, not an investment agreement.<br/>Past results do not guarantee future returns.
               </p>
             </motion.div>
@@ -195,16 +194,16 @@ export function QuizFunnel({ onComplete }: QuizFunnelProps) {
               animate={{ opacity: 1, scale: 1 }}
               className="text-center py-8"
             >
-              <div className="w-16 h-16 bg-ink-100 rounded-full flex items-center justify-center text-ink-500 mx-auto mb-6">
+              <div className="w-16 h-16 bg-indigo/10 rounded-full flex items-center justify-center text-indigo mx-auto mb-6">
                 <Info className="w-8 h-8" />
               </div>
-              <h3 className="font-serif text-3xl font-bold text-ink-900 mb-4">Not the Right Fit — Yet.</h3>
+              <h3 className="font-serif text-3xl font-bold text-indigo mb-4">Not the Right Fit — Yet.</h3>
               <p className="text-[15px] text-ink-500 leading-relaxed max-w-lg mx-auto">
                 Based on your answers, you may not currently meet the accredited investor requirements for World Bridge Capital. Accreditation requirements may change as your financial situation evolves — we'd encourage you to revisit when your circumstances change.
               </p>
               <button 
                 onClick={() => { setCur(0); setAnswers([]); setStatus('playing'); }}
-                className="mt-10 font-sans text-[12px] font-bold tracking-widest uppercase text-ink-600 border border-ink-200 px-8 py-3 hover:bg-ink-100 transition-colors"
+                className="mt-10 font-sans text-[12px] font-bold tracking-widest uppercase text-indigo border border-indigo/20 px-8 py-3 hover:bg-indigo/5 transition-colors"
               >
                 Start Over
               </button>

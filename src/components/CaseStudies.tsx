@@ -42,36 +42,35 @@ export function CaseStudies() {
   ];
 
   return (
-    <section className="py-24 px-6 md:px-14 bg-white border-y border-ink-200" id="results">
+    <section className="py-24 px-6 md:px-14 bg-white border-y border-indigo/10" id="results">
       <div className="max-w-6xl mx-auto">
         <motion.div 
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={reveal}
-          className="flex items-center gap-3 text-[10px] font-bold tracking-[0.2em] uppercase text-hunter mb-4"
+          className="flex items-center gap-3 text-[10px] font-bold tracking-[0.2em] uppercase text-teal-dark mb-4"
         >
-          <div className="w-5 h-px bg-hunter opacity-70"></div>
+          <div className="w-5 h-px bg-teal-dark opacity-70"></div>
           Investor Case Studies
         </motion.div>
         
         <motion.h2 
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={reveal}
-          className="font-serif text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05] tracking-tight text-ink-900 font-semibold mb-12"
+          className="font-serif text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05] tracking-tight text-indigo font-semibold mb-12"
         >
-          How accredited investors<br/>are using <em className="italic text-hunter font-medium">trade finance.</em>
+          How accredited investors<br/>are using <em className="italic text-teal-dark font-medium">trade finance.</em>
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-ink-200 border border-ink-200">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-indigo/10 border border-indigo/10">
           {cases.map((c, i) => (
             <motion.div 
               key={i}
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={reveal}
-              className="bg-white flex flex-col transition-colors duration-300 hover:bg-cream-100"
+              className="bg-white flex flex-col transition-colors duration-300 hover:bg-teal-50"
             >
-              {/* Top Strip */}
-              <div className="bg-ink-900 p-4 md:px-6 flex items-center justify-between gap-4">
+              <div className="bg-indigo p-4 md:px-6 flex items-center justify-between gap-4">
                 <div className="text-[9px] font-bold tracking-[0.14em] uppercase text-white/50 leading-tight w-1/2">
                   {c.catLabel}
                 </div>
-                <div className="font-serif text-lg font-bold text-hunter leading-none text-right">
+                <div className="font-serif text-lg font-bold text-teal leading-none text-right">
                   <em className="italic">{c.result}</em>
                   {c.resultSuffix && <span className="text-white text-sm ml-1 font-sans font-medium tracking-normal">{c.resultSuffix}</span>}
                 </div>
@@ -81,27 +80,27 @@ export function CaseStudies() {
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   {c.metrics.map((m: any, idx: number) => (
                     <div key={idx}>
-                      <div className="font-serif text-2xl font-bold text-ink-900 leading-none">
-                        <em className="italic text-hunter">{m.n}</em>
-                        {m.nSuffix && <span className="text-base font-sans text-ink-900 ml-1 font-semibold">{m.nSuffix}</span>}
+                      <div className="font-serif text-2xl font-bold text-indigo leading-none">
+                        <em className="italic text-teal-dark">{m.n}</em>
+                        {m.nSuffix && <span className="text-base font-sans text-indigo ml-1 font-semibold">{m.nSuffix}</span>}
                       </div>
-                      <div className="text-[9px] font-bold tracking-[0.08em] uppercase text-ink-400 mt-1.5">{m.l}</div>
+                      <div className="text-[9px] font-bold tracking-[0.08em] uppercase text-ink-300 mt-1.5">{m.l}</div>
                     </div>
                   ))}
-                  <div className="col-span-2 h-px bg-ink-200 mt-2"></div>
+                  <div className="col-span-2 h-px bg-indigo/10 mt-2"></div>
                 </div>
                 
-                <p className="text-[13.5px] leading-[1.68] text-ink-500 italic flex-1 mb-6 pl-3 border-l-2 border-hunter/20">
+                <p className="text-[13.5px] leading-[1.68] text-ink-500 italic flex-1 mb-6 pl-3 border-l-2 border-teal-pale">
                   "{c.quote}"
                 </p>
                 
-                <div className="flex gap-3 items-center pt-4 border-t border-ink-200 mt-auto">
-                  <div className="w-8 h-8 shrink-0 bg-ink-900 flex items-center justify-center font-serif text-xs font-bold text-hunter">
+                <div className="flex gap-3 items-center pt-4 border-t border-indigo/10 mt-auto">
+                  <div className="w-8 h-8 shrink-0 bg-indigo flex items-center justify-center font-serif text-xs font-bold text-teal">
                     {c.author.av}
                   </div>
                   <div>
-                    <div className="text-[12.5px] font-bold text-ink-800">{c.author.name}</div>
-                    <div className="text-[10px] text-ink-400 mt-0.5">{c.author.role}</div>
+                    <div className="text-[12.5px] font-bold text-indigo-700">{c.author.name}</div>
+                    <div className="text-[10px] text-ink-300 mt-0.5">{c.author.role}</div>
                   </div>
                 </div>
               </div>

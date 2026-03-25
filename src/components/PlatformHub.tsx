@@ -29,16 +29,16 @@ export function PlatformHub({ onResourceClick }: PlatformHubProps) {
     <section className="py-24 px-6 md:px-14 max-w-6xl mx-auto">
       <motion.div 
         initial="hidden" whileInView="visible" viewport={{ once: true }} variants={reveal}
-        className="flex items-center gap-3 text-[10px] font-bold tracking-[0.2em] uppercase text-hunter mb-4"
+        className="flex items-center gap-3 text-[10px] font-bold tracking-[0.2em] uppercase text-teal-dark mb-4"
       >
-        <div className="w-5 h-px bg-hunter opacity-70"></div>
+        <div className="w-5 h-px bg-teal-dark opacity-70"></div>
         The Platform
       </motion.div>
       <motion.h2 
         initial="hidden" whileInView="visible" viewport={{ once: true }} variants={reveal}
-        className="font-serif text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05] tracking-tight text-ink-900 font-semibold mb-16"
+        className="font-serif text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05] tracking-tight text-indigo font-semibold mb-16"
       >
-        World Bridge Capital is not<br/>just a fund. It is <em className="italic text-hunter font-medium">the hub</em><br/>for trade finance investors.
+        World Bridge Capital is not<br/>just a fund. It is <em className="italic text-teal-dark font-medium">the hub</em><br/>for trade finance investors.
       </motion.h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
@@ -46,14 +46,14 @@ export function PlatformHub({ onResourceClick }: PlatformHubProps) {
           <p className="text-[17px] text-ink-500 leading-relaxed mb-10">
             Most investment vehicles give you exposure to an asset class and little else. We are building something different — the full infrastructure for accredited investors who want to understand, access, and scale their exposure to trade finance.
           </p>
-          <div className="flex flex-col border-t border-ink-200">
+          <div className="flex flex-col border-t border-indigo/10">
             {features.map((f, i) => (
-              <div key={i} className="flex items-start gap-5 py-6 border-b border-ink-200 group hover:bg-cream-100 transition-colors -mx-4 px-4">
-                <div className="w-10 h-10 shrink-0 bg-white border border-ink-200 flex items-center justify-center text-ink-600 group-hover:border-hunter/30 group-hover:text-hunter transition-colors shadow-sm">
+              <div key={i} className="flex items-start gap-5 py-6 border-b border-indigo/10 group hover:bg-teal-50 transition-colors -mx-4 px-4">
+                <div className="w-10 h-10 shrink-0 bg-white border border-indigo/10 flex items-center justify-center text-indigo group-hover:border-teal-dark/30 group-hover:text-teal-dark transition-colors shadow-sm">
                   <f.icon className="w-5 h-5 stroke-[1.5]" />
                 </div>
                 <div>
-                  <h4 className="text-[14px] font-bold text-ink-800 mb-1.5">{f.title}</h4>
+                  <h4 className="text-[14px] font-bold text-indigo-700 mb-1.5">{f.title}</h4>
                   <p className="text-[13px] text-ink-500 leading-[1.6]">{f.text}</p>
                 </div>
               </div>
@@ -61,20 +61,20 @@ export function PlatformHub({ onResourceClick }: PlatformHubProps) {
           </div>
         </motion.div>
 
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={reveal} className="bg-cream-100/50 p-6 md:p-8 border border-ink-200">
-          <div className="text-[11px] font-bold tracking-[0.14em] uppercase text-ink-400 mb-6">From the education hub</div>
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={reveal} className="bg-cream-200/50 p-6 md:p-8 border border-indigo/10">
+          <div className="text-[11px] font-bold tracking-[0.14em] uppercase text-ink-300 mb-6">From the education hub</div>
           <div className="flex flex-col gap-3">
             {resources.map((r, i) => (
               <div 
                 key={i} 
                 onClick={onResourceClick}
-                className="bg-white border border-ink-200 p-5 flex items-start gap-4 cursor-pointer hover:border-hunter/40 hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 group"
+                className="bg-white border border-indigo/10 p-5 flex items-start gap-4 cursor-pointer hover:border-teal-dark/40 hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 group"
               >
-                <div className="text-[9px] font-bold tracking-[0.1em] uppercase text-hunter bg-hunter/5 border border-hunter/10 px-2.5 py-1 whitespace-nowrap shrink-0 mt-0.5">
+                <div className="text-[9px] font-bold tracking-[0.1em] uppercase text-teal-dark bg-teal-50 border border-teal-pale px-2.5 py-1 whitespace-nowrap shrink-0 mt-0.5">
                   {r.type}
                 </div>
                 <div>
-                  <h4 className="text-[14px] font-semibold text-ink-800 mb-1.5 group-hover:text-hunter transition-colors">{r.title}</h4>
+                  <h4 className="text-[14px] font-semibold text-indigo-700 mb-1.5 group-hover:text-teal-dark transition-colors">{r.title}</h4>
                   <p className="text-[12.5px] text-ink-500 leading-relaxed">{r.desc}</p>
                 </div>
               </div>

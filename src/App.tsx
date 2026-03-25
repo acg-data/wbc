@@ -35,7 +35,7 @@ function App() {
   const openModal = () => setIsModalOpen(true);
 
   return (
-    <div className="min-h-screen bg-cream selection:bg-hunter/20 selection:text-ink-900 font-sans text-ink-600">
+    <div className="min-h-screen bg-cream font-sans text-ink-500">
       <Nav onQuizClick={scrollToQuiz} />
       
       <main>
@@ -58,16 +58,16 @@ function App() {
 
       {/* Sticky Bottom Bar */}
       <div 
-        className={`fixed bottom-0 left-0 right-0 z-40 bg-cream/95 backdrop-blur-md border-t border-ink-200 shadow-[0_-4px_24px_rgba(10,13,20,0.05)] px-6 py-3 flex flex-col md:flex-row justify-between items-center gap-3 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        className={`fixed bottom-0 left-0 right-0 z-40 bg-cream/95 backdrop-blur-md border-t border-ink-100 shadow-[0_-4px_24px_rgba(39,33,98,0.08)] px-6 py-3 flex flex-col md:flex-row justify-between items-center gap-3 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           showSticky ? 'translate-y-0' : 'translate-y-full'
         }`}
       >
         <div className="text-[13px] font-medium text-ink-500 text-center md:text-left">
-          Earn <strong className="text-hunter">8–10% + profit sharing</strong> on asset-backed trade finance. Q2 2026 allocation open now.
+          Earn <strong className="text-teal-dark">8–10% + profit sharing</strong> on asset-backed trade finance. Q2 2026 allocation open now.
         </div>
         <button 
           onClick={scrollToQuiz}
-          className="font-sans text-[11px] font-bold tracking-widest uppercase text-white bg-hunter px-6 py-2.5 hover:bg-hunter-dark transition-all duration-200 transform hover:-translate-y-px shadow-sm"
+          className="font-sans text-[11px] font-bold tracking-widest uppercase text-white bg-teal-dark px-6 py-2.5 hover:bg-teal-dim transition-all duration-200 transform hover:-translate-y-px shadow-sm"
         >
           Check Eligibility &rarr;
         </button>

@@ -20,29 +20,29 @@ export function FAQ() {
   ];
 
   return (
-    <section className="py-24 px-6 md:px-14 bg-white border-y border-ink-200">
+    <section className="py-24 px-6 md:px-14 bg-white border-y border-indigo/10">
       <div className="max-w-4xl mx-auto">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={reveal} className="mb-12">
-          <div className="flex items-center gap-3 text-[10px] font-bold tracking-[0.2em] uppercase text-hunter mb-4">
-            <div className="w-5 h-px bg-hunter opacity-70"></div>
+          <div className="flex items-center gap-3 text-[10px] font-bold tracking-[0.2em] uppercase text-teal-dark mb-4">
+            <div className="w-5 h-px bg-teal-dark opacity-70"></div>
             FAQ
           </div>
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05] tracking-tight text-ink-900 font-semibold">
-            Questions serious investors<br/><em className="italic text-hunter font-medium">always ask.</em>
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05] tracking-tight text-indigo font-semibold">
+            Questions serious investors<br/><em className="italic text-teal-dark font-medium">always ask.</em>
           </h2>
         </motion.div>
 
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={reveal} className="divide-y divide-ink-200 border-t border-b border-ink-200">
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={reveal} className="divide-y divide-indigo/10 border-t border-b border-indigo/10">
           {faqs.map((faq, i) => (
             <div key={i} className="py-6">
               <button 
                 className="w-full flex items-center justify-between gap-6 text-left group"
                 onClick={() => setOpenIdx(openIdx === i ? null : i)}
               >
-                <span className={`text-[16px] font-bold transition-colors ${openIdx === i ? 'text-hunter' : 'text-ink-800 group-hover:text-hunter'}`}>
+                <span className={`text-[16px] font-bold transition-colors ${openIdx === i ? 'text-teal-dark' : 'text-indigo-700 group-hover:text-teal-dark'}`}>
                   {faq.q}
                 </span>
-                <div className={`w-8 h-8 shrink-0 rounded-full border flex items-center justify-center transition-all duration-300 ${openIdx === i ? 'bg-hunter/10 border-hunter/30 text-hunter' : 'bg-transparent border-ink-200 text-ink-400 group-hover:border-hunter/30 group-hover:text-hunter'}`}>
+                <div className={`w-8 h-8 shrink-0 rounded-full border flex items-center justify-center transition-all duration-300 ${openIdx === i ? 'bg-teal-50 border-teal-dark/30 text-teal-dark' : 'bg-transparent border-indigo/20 text-ink-300 group-hover:border-teal-dark/30 group-hover:text-teal-dark'}`}>
                   {openIdx === i ? <X className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
                 </div>
               </button>

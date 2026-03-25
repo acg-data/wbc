@@ -20,12 +20,12 @@ export function Included() {
   return (
     <section className="py-24 px-6 md:px-14 max-w-4xl mx-auto">
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={reveal}>
-        <div className="flex items-center gap-3 text-[10px] font-bold tracking-[0.2em] uppercase text-hunter mb-4">
-          <div className="w-5 h-px bg-hunter opacity-70"></div>
+        <div className="flex items-center gap-3 text-[10px] font-bold tracking-[0.2em] uppercase text-teal-dark mb-4">
+          <div className="w-5 h-px bg-teal-dark opacity-70"></div>
           Investment Structure
         </div>
-        <h2 className="font-serif text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05] tracking-tight text-ink-900 font-semibold">
-          What you get as a<br/>World Bridge <em className="italic text-hunter font-medium">investor.</em>
+        <h2 className="font-serif text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05] tracking-tight text-indigo font-semibold">
+          What you get as a<br/>World Bridge <em className="italic text-teal-dark font-medium">investor.</em>
         </h2>
         <p className="text-[17px] text-ink-500 mt-6 mb-12">
           Transparent structure. No hidden fees. Clear terms from day one.
@@ -34,24 +34,24 @@ export function Included() {
 
       <motion.div 
         initial="hidden" whileInView="visible" viewport={{ once: true }} variants={reveal}
-        className="bg-white border border-ink-200 shadow-sm"
+        className="bg-white border border-indigo/10 shadow-sm"
       >
-        <div className="divide-y divide-ink-200">
+        <div className="divide-y divide-indigo/10">
           {inclusions.map((inc, i) => (
-            <div key={i} className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 md:px-8 hover:bg-cream-100 transition-colors">
+            <div key={i} className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 md:px-8 hover:bg-teal-50 transition-colors">
               <div>
-                <div className="text-[14.5px] font-bold text-ink-800">{inc.name}</div>
+                <div className="text-[14.5px] font-bold text-indigo-700">{inc.name}</div>
                 <div className="text-[13px] text-ink-500 mt-1">{inc.sub}</div>
               </div>
-              <div className="text-[11px] font-bold tracking-[0.08em] uppercase text-hunter shrink-0 bg-hunter/5 px-3 py-1 border border-hunter/10 self-start md:self-auto">
+              <div className="text-[11px] font-bold tracking-[0.08em] uppercase text-teal-dark bg-teal-50 px-3 py-1 border border-teal-pale self-start md:self-auto">
                 ✓ {inc.tag}
               </div>
             </div>
           ))}
         </div>
-        <div className="bg-ink-900 p-6 md:px-8 flex items-center justify-between border-t-2 border-hunter">
+        <div className="bg-indigo p-6 md:px-8 flex items-center justify-between border-t-2 border-teal-dark">
           <div className="font-serif text-2xl font-bold text-white">Minimum Investment</div>
-          <div className="font-serif text-2xl font-bold text-hunter"><em className="italic">Discussed on Intro Call</em></div>
+          <div className="font-serif text-2xl font-bold text-teal"><em className="italic">Discussed on Intro Call</em></div>
         </div>
       </motion.div>
     </section>
