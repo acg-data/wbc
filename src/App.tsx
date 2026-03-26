@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { Nav } from './components/Nav';
 import { Hero } from './components/Hero';
-import { VSL } from './components/VSL';
 import { ProofTicker } from './components/ProofTicker';
 import { AssetClass } from './components/AssetClass';
 import { Returns } from './components/Returns';
@@ -15,10 +14,16 @@ import { FAQ } from './components/FAQ';
 import { FinalCTA } from './components/FinalCTA';
 import { Footer } from './components/Footer';
 import { Modal } from './components/Modal';
+import { TrustBar } from './components/TrustBar';
+import { ExitIntentModal } from './components/ExitIntentModal';
+
+// Lazy load VSL for performance
+const VSL = lazy(() => import('./components/VSL').then(module => ({ default: module.VSL })));
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showSticky, setShowSticky] = useState(false);
+  const [exitIntentKey, setExitIntentKey] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,13 +39,24 @@ function App() {
 
   const openModal = () => setIsModalOpen(true);
 
+  const closeExitIntent = () => setExitIntentKey(prev => prev + 1);
+
   return (
     <div className="min-h-screen bg-cream font-sans text-ink-500">
       <Nav onQuizClick={scrollToQuiz} />
       
       <main>
         <Hero />
-        <VSL onQuizClick={scrollToQuiz} />
+        
+        {/* Lazy loaded VSL */}
+        <Suspense fallback={
+          <div className="h-96 flex items-center justify-center bg-indigo-dark">
+            <div className="animate-pulse text-white/50">Loading...</div>
+          </div>
+        }>
+          <VSL onQuizClick={scrollToQuiz} />
+        </Suspense>
+        
         <ProofTicker />
         <AssetClass />
         <Returns />
@@ -51,6 +67,7 @@ function App() {
         <QuizFunnel onComplete={openModal} />
         <Included />
         <FAQ />
+        <TrustBar />
         <FinalCTA onQuizClick={scrollToQuiz} />
       </main>
 
@@ -74,6 +91,7 @@ function App() {
       </div>
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <ExitIntentModal key={exitIntentKey} onClose={closeExitIntent} />
     </div>
   );
 }

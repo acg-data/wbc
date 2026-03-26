@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Info, ArrowRight, ArrowLeft } from 'lucide-react';
 
@@ -22,8 +22,24 @@ export function QuizFunnel({ onComplete }: QuizFunnelProps) {
   const [status, setStatus] = useState<'playing' | 'complete' | 'disqualified'>('playing');
   const [direction, setDirection] = useState(1);
 
+  // Auto-save to localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem('wbcQuizAnswers');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      setAnswers(parsed);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (answers.length > 0) {
+      localStorage.setItem('wbcQuizAnswers', JSON.stringify(answers));
+    }
+  }, [answers]);
+
   const handleSelect = (idx: number) => {
     const newAnswers = [...answers];
+    while (newAnswers.length <= cur) newAnswers.push(-1);
     newAnswers[cur] = idx;
     setAnswers(newAnswers);
   };
@@ -51,11 +67,21 @@ export function QuizFunnel({ onComplete }: QuizFunnelProps) {
     }
   };
 
+  const resetQuiz = () => {
+    setCur(0);
+    setAnswers([]);
+    setStatus('playing');
+    localStorage.removeItem('wbcQuizAnswers');
+  };
+
   const variants = {
     enter: (direction: number) => ({ x: direction > 0 ? 20 : -20, opacity: 0 }),
     center: { x: 0, opacity: 1 },
     exit: (direction: number) => ({ x: direction < 0 ? 20 : -20, opacity: 0 })
   };
+
+  const questionsRemaining = questions.length - cur - 1;
+  const progressPercent = ((cur + 1) / questions.length) * 100;
 
   return (
     <section className="py-24 px-6 md:px-14 bg-cream-200 border-y border-indigo/10" id="quiz">
@@ -69,9 +95,6 @@ export function QuizFunnel({ onComplete }: QuizFunnelProps) {
           <h2 className="font-serif text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05] tracking-tight text-indigo font-semibold">
             Find out if you <em className="italic text-teal-dark font-medium">qualify</em><br/>in 90 seconds.
           </h2>
-          <p className="text-[17px] text-ink-500 mt-6 max-w-xl mx-auto leading-relaxed">
-            World Bridge Capital is only open to accredited investors. Answer 7 short questions to check your eligibility and receive your personalised next steps.
-          </p>
         </div>
 
         <div className="bg-white border border-indigo/10 shadow-sm p-8 md:p-12 relative overflow-hidden">
@@ -79,21 +102,29 @@ export function QuizFunnel({ onComplete }: QuizFunnelProps) {
           
           {status === 'playing' && (
             <>
-              <div className="flex items-center gap-4 mb-10">
+              <div className="flex items-center gap-4 mb-8">
                 <div className="flex-1 h-[2px] bg-indigo/10 overflow-hidden">
                   <motion.div 
                     className="h-full bg-teal-dark"
                     initial={{ width: 0 }}
-                    animate={{ width: `${(cur / questions.length) * 100}%` }}
+                    animate={{ width: `${progressPercent}%` }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
                   />
                 </div>
                 <div className="font-mono text-[10px] text-ink-300 uppercase tracking-widest whitespace-nowrap">
-                  Question {cur + 1} of {questions.length}
+                  {cur + 1}/{questions.length}
                 </div>
               </div>
 
-              <div className="min-h-[280px] relative">
+              {/* Progress indicator */}
+              <div className="text-center text-xs text-ink-400 mb-8 font-medium">
+                {questionsRemaining > 0 
+                  ? `You're ${questionsRemaining} question${questionsRemaining > 1 ? 's' : ''} away from your results`
+                  : 'Final question — almost done!'
+                }
+              </div>
+
+              <div className="min-h-[260px] relative">
                 <AnimatePresence custom={direction} mode="wait">
                   <motion.div
                     key={cur}
@@ -102,7 +133,7 @@ export function QuizFunnel({ onComplete }: QuizFunnelProps) {
                     initial="enter"
                     animate="center"
                     exit="exit"
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    transition={{ duration: 0.25, ease: "easeInOut" }}
                     className="w-full"
                   >
                     <h3 className="font-serif text-2xl md:text-3xl font-semibold leading-snug text-indigo mb-8">
@@ -118,10 +149,10 @@ export function QuizFunnel({ onComplete }: QuizFunnelProps) {
                           <button
                             key={i}
                             onClick={() => handleSelect(i)}
-                            className={`flex items-center gap-4 p-4 border text-left transition-all duration-200 ${
+                            className={`flex items-center gap-4 p-4 border text-left transition-all duration-200 active:scale-[0.99] ${
                               isSelected 
                                 ? 'border-teal-dark bg-teal-50 ring-1 ring-teal-dark' 
-                                : 'border-indigo/10 bg-cream-100/50 hover:border-teal-dark/50 hover:bg-teal-50/50'
+                                : 'border-indigo/10 bg-cream-100/50 hover:border-teal-dark/50 hover:bg-teal-50/50 hover:translate-x-1'
                             }`}
                           >
                             <div className={`w-6 h-6 shrink-0 border flex items-center justify-center text-[10px] font-bold font-mono transition-colors ${
@@ -140,7 +171,7 @@ export function QuizFunnel({ onComplete }: QuizFunnelProps) {
                 </AnimatePresence>
               </div>
 
-              <div className="flex items-center justify-between mt-10 pt-6 border-t border-indigo/10">
+              <div className="flex items-center justify-between mt-8 pt-6 border-t border-indigo/10">
                 <button 
                   onClick={handleBack}
                   className={`flex items-center gap-2 text-[12px] font-bold tracking-widest uppercase text-ink-300 hover:text-indigo transition-colors ${cur === 0 ? 'invisible' : ''}`}
@@ -153,7 +184,7 @@ export function QuizFunnel({ onComplete }: QuizFunnelProps) {
                   disabled={answers[cur] === undefined}
                   className={`flex items-center gap-2 font-sans text-[12px] font-bold tracking-widest uppercase px-6 py-3 transition-all duration-200 ${
                     answers[cur] !== undefined 
-                      ? 'bg-indigo text-white hover:bg-teal-dark shadow-lg hover:shadow-teal-dark/20 transform hover:-translate-y-px' 
+                      ? 'bg-indigo text-white hover:bg-teal-dark shadow-lg hover:shadow-teal-dark/20 transform hover:-translate-y-px active:translate-y-0' 
                       : 'bg-indigo/30 text-ink-300 cursor-not-allowed'
                   }`}
                 >
@@ -174,16 +205,16 @@ export function QuizFunnel({ onComplete }: QuizFunnelProps) {
               </div>
               <h3 className="font-serif text-3xl font-bold text-indigo mb-4">You Appear to <em className="italic text-teal-dark">Qualify.</em></h3>
               <p className="text-[15px] text-ink-500 leading-relaxed mb-10 max-w-lg mx-auto">
-                Based on your answers, you meet the criteria to invest with World Bridge Capital. Submit your application below and our team will reach out within 24 hours to walk you through the investment structure and available positions.
+                Based on your answers, you meet the criteria to invest with World Bridge Capital. Submit your application below and our team will reach out within 24 hours.
               </p>
               <button 
                 onClick={onComplete}
-                className="w-full md:w-auto font-sans text-[13px] font-bold tracking-widest uppercase text-white bg-teal-dark px-10 py-4 hover:bg-teal-dim transition-all duration-200 shadow-lg hover:shadow-teal-dark/30 transform hover:-translate-y-px"
+                className="w-full md:w-auto font-sans text-[13px] font-bold tracking-widest uppercase text-white bg-teal-dark px-10 py-4 hover:bg-teal-dim transition-all duration-200 shadow-lg hover:shadow-teal-dark/30 transform hover:-translate-y-px active:translate-y-0"
               >
                 Submit My Application &rarr;
               </button>
               <p className="text-[11px] text-ink-300 mt-6 leading-[1.6]">
-                No commitment required. This is a qualification step, not an investment agreement.<br/>Past results do not guarantee future returns.
+                No commitment required. Past results do not guarantee future returns.
               </p>
             </motion.div>
           )}
@@ -199,10 +230,10 @@ export function QuizFunnel({ onComplete }: QuizFunnelProps) {
               </div>
               <h3 className="font-serif text-3xl font-bold text-indigo mb-4">Not the Right Fit — Yet.</h3>
               <p className="text-[15px] text-ink-500 leading-relaxed max-w-lg mx-auto">
-                Based on your answers, you may not currently meet the accredited investor requirements for World Bridge Capital. Accreditation requirements may change as your financial situation evolves — we'd encourage you to revisit when your circumstances change.
+                Based on your answers, you may not currently meet the accredited investor requirements. We encourage you to revisit when your circumstances change.
               </p>
               <button 
-                onClick={() => { setCur(0); setAnswers([]); setStatus('playing'); }}
+                onClick={resetQuiz}
                 className="mt-10 font-sans text-[12px] font-bold tracking-widest uppercase text-indigo border border-indigo/20 px-8 py-3 hover:bg-indigo/5 transition-colors"
               >
                 Start Over

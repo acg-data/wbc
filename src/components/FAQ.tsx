@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, X } from 'lucide-react';
+import { Plus, X, ThumbsUp, ThumbsDown } from 'lucide-react';
 
 export function FAQ() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const [helpful, setHelpful] = useState<Record<number, 'yes' | 'no' | null>>({});
 
   const reveal: any = {
     hidden: { opacity: 0, y: 20 },
@@ -34,12 +35,12 @@ export function FAQ() {
 
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={reveal} className="divide-y divide-indigo/10 border-t border-b border-indigo/10">
           {faqs.map((faq, i) => (
-            <div key={i} className="py-6">
+            <div key={i} className="py-6 group">
               <button 
-                className="w-full flex items-center justify-between gap-6 text-left group"
+                className="w-full flex items-center justify-between gap-6 text-left"
                 onClick={() => setOpenIdx(openIdx === i ? null : i)}
               >
-                <span className={`text-[16px] font-bold transition-colors ${openIdx === i ? 'text-teal-dark' : 'text-indigo-700 group-hover:text-teal-dark'}`}>
+                <span className={`text-[16px] font-bold transition-colors pr-4 ${openIdx === i ? 'text-teal-dark' : 'text-indigo-700 group-hover:text-teal-dark'}`}>
                   {faq.q}
                 </span>
                 <div className={`w-8 h-8 shrink-0 rounded-full border flex items-center justify-center transition-all duration-300 ${openIdx === i ? 'bg-teal-50 border-teal-dark/30 text-teal-dark' : 'bg-transparent border-indigo/20 text-ink-300 group-hover:border-teal-dark/30 group-hover:text-teal-dark'}`}>
@@ -55,9 +56,30 @@ export function FAQ() {
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <p className="pt-4 pb-2 text-[14.5px] text-ink-500 leading-relaxed pr-10">
+                    <p className="pt-4 pb-4 text-[14.5px] text-ink-500 leading-relaxed pr-10">
                       {faq.a}
                     </p>
+                    {/* Was this helpful? */}
+                    <div className="flex items-center gap-4 pt-2 border-t border-indigo/5">
+                      <span className="text-xs text-ink-300">Was this helpful?</span>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => setHelpful(prev => ({ ...prev, [i]: 'yes' }))}
+                          className={`p-1.5 rounded transition-colors ${helpful[i] === 'yes' ? 'text-teal-dark bg-teal-50' : 'text-ink-300 hover:text-teal-dark hover:bg-teal-50/50'}`}
+                        >
+                          <ThumbsUp className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => setHelpful(prev => ({ ...prev, [i]: 'no' }))}
+                          className={`p-1.5 rounded transition-colors ${helpful[i] === 'no' ? 'text-red-600 bg-red-50' : 'text-ink-300 hover:text-red-600 hover:bg-red-50/50'}`}
+                        >
+                          <ThumbsDown className="w-4 h-4" />
+                        </button>
+                      </div>
+                      {helpful[i] && (
+                        <span className="text-xs text-teal-dark font-medium">Thanks!</span>
+                      )}
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
