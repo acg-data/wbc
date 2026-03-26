@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Globe2, Search, Briefcase, TrendingUp } from 'lucide-react';
+import { PerformanceDisclaimer } from './Disclaimers';
 
 export function HowItWorks() {
   const reveal: any = {
@@ -11,24 +12,25 @@ export function HowItWorks() {
     { tag: "Step 01", icon: Globe2, title: "We Source Cross-Border Deals", text: "Our team identifies US businesses and international counterparts with verified receivables — import/export invoices from creditworthy buyers with 30–90 day payment terms.", cycle: "→ Continuous deal flow" },
     { tag: "Step 02", icon: Search, title: "We Underwrite & Verify", text: "Every invoice is verified, buyer credit is assessed, and legal recourse is established before a single dollar deploys. Asset-backed discipline is non-negotiable.", cycle: "→ Multi-layer diligence" },
     { tag: "Step 03", icon: Briefcase, title: "Investor Capital Deploys", text: "Accredited investor capital funds the advance — typically 80–90% of the invoice face value. The business gets liquidity. You hold a secured position against a real receivable.", cycle: "→ Asset-secured" },
-    { tag: "Step 04", icon: TrendingUp, title: "Invoice Pays. You Earn.", text: "When the buyer pays, principal returns with your factoring fee — targeting 8–10% annualized. Plus profit sharing on portfolio performance above base targets.", cycle: "→ 30–90 day cycle" },
+    { tag: "Step 04", icon: TrendingUp, title: "Invoice Pays. You Earn.", text: "When the buyer pays, principal returns with your factoring fee — targeting 8–10% annualized.* Plus potential profit sharing on portfolio performance above base targets.", cycle: "→ 30–90 day cycle" },
   ];
 
   return (
-    <section className="py-24 px-6 md:px-14 max-w-6xl mx-auto">
+    <section className="py-24 px-6 md:px-14 max-w-6xl mx-auto" aria-labelledby="how-heading">
       <div className="mb-14">
         <motion.div 
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={reveal}
           className="flex items-center gap-3 text-[10px] font-bold tracking-[0.2em] uppercase text-teal-dark mb-4"
         >
-          <div className="w-5 h-px bg-teal-dark opacity-70"></div>
+          <div className="w-5 h-px bg-teal-dark opacity-70" aria-hidden="true"></div>
           The Model
         </motion.div>
         <motion.h2 
+          id="how-heading"
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={reveal}
           className="font-serif text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05] tracking-tight text-indigo font-semibold"
         >
-          How World Bridge Capital<br/>generates your <em className="italic text-teal-dark font-medium">returns.</em>
+          How World Bridge Capital<br/>targets your <em className="italic text-teal-dark font-medium">returns.</em>
         </motion.h2>
       </div>
 
@@ -41,12 +43,12 @@ export function HowItWorks() {
             key={i} 
             className="p-8 border-b lg:border-b-0 lg:border-r border-indigo/10 bg-white relative group hover:bg-teal-50 transition-colors duration-300"
           >
-            <div className="absolute top-0 left-0 right-0 h-[2px] bg-transparent group-hover:bg-teal-dark transition-colors duration-300"></div>
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-transparent group-hover:bg-teal-dark transition-colors duration-300" aria-hidden="true"></div>
             
             <div className="font-mono text-[10px] font-medium tracking-[0.16em] uppercase text-ink-300 mb-6">
               {step.tag}
             </div>
-            <step.icon className="w-6 h-6 text-indigo mb-4 stroke-[1.5]" />
+            <step.icon className="w-6 h-6 text-indigo mb-4 stroke-[1.5]" aria-hidden="true" />
             <h3 className="font-serif text-xl font-bold text-indigo mb-3 leading-[1.2]">
               {step.title}
             </h3>
@@ -59,6 +61,8 @@ export function HowItWorks() {
           </div>
         ))}
       </motion.div>
+
+      <PerformanceDisclaimer className="mt-4 max-w-4xl mx-auto" variant="inline" />
     </section>
   );
 }
